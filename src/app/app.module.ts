@@ -22,6 +22,7 @@ import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.componen
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
 import { UserService } from './user.service';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
 
 
 const routes = [
@@ -50,6 +51,9 @@ const routes = [
     path: 'admin/products', component: AdminProductsComponent, CanActivate: [AuthGuard,AdminAuthGuardService]
   },
   {
+    path: 'admin/products/new', component: ProductFormComponent, CanActivate: [AuthGuard,AdminAuthGuardService]
+  },
+  {
     path: 'admin/orders', component: AdminOrdersComponent, CanActivate: [AuthGuard,AdminAuthGuardService]
   }
 ]
@@ -66,7 +70,8 @@ const routes = [
     MyOrdersComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
-    LoginComponent
+    LoginComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
