@@ -1,3 +1,5 @@
+import { ProductService } from './product.service';
+import { CategoryService } from './category.service';
 import { AdminAuthGuardService } from './admin-auth-guard.service';
 import { AuthGuard } from './auth-guard.service';
 import { environment } from './../environments/environment'
@@ -8,6 +10,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { RouterModule, CanActivate } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {CustomFormsModule} from 'ng2-validation';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -23,6 +26,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
 import { UserService } from './user.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { FormsModule } from '@angular/forms';
 
 
 const routes = [
@@ -36,7 +40,7 @@ const routes = [
     path: 'shopping-cart', component: ShoppingCartComponent
   },
   {
-    path: 'check-out', component: CheckOutComponent,CanActivate:AuthGuard
+    path: 'check-out', component: CheckOutComponent, CanActivate: AuthGuard
   },
   {
     path: 'my/orders', component: MyOrdersComponent
@@ -48,13 +52,13 @@ const routes = [
     path: 'login', component: LoginComponent
   },
   {
-    path: 'admin/products', component: AdminProductsComponent, CanActivate: [AuthGuard,AdminAuthGuardService]
+    path: 'admin/products', component: AdminProductsComponent, CanActivate: [AuthGuard, AdminAuthGuardService]
   },
   {
-    path: 'admin/products/new', component: ProductFormComponent, CanActivate: [AuthGuard,AdminAuthGuardService]
+    path: 'admin/products/new', component: ProductFormComponent, CanActivate: [AuthGuard, AdminAuthGuardService]
   },
   {
-    path: 'admin/orders', component: AdminOrdersComponent, CanActivate: [AuthGuard,AdminAuthGuardService]
+    path: 'admin/orders', component: AdminOrdersComponent, CanActivate: [AuthGuard, AdminAuthGuardService]
   }
 ]
 
@@ -80,8 +84,15 @@ const routes = [
     AngularFireAuthModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(routes),
+    FormsModule,
+    CustomFormsModule,
   ],
-  providers: [AuthService, AuthGuard, UserService, AdminAuthGuardService],
+  providers: [AuthService,
+    AuthGuard,
+    UserService,
+    AdminAuthGuardService,
+    CategoryService,
+    ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

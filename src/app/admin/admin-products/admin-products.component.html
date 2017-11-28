@@ -1,1 +1,20 @@
-<a routerLink="/admin/products/new" class="btn btn-primary">Add new + </a>
+<p>
+    <a routerLink="/admin/products/new" class="btn btn-primary">Add new product+ </a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let p of products$ | async">
+            <td>{{p.title}}</td>
+            <td>{{p.price | currency:'NZD':true}}</td>
+            <td><a routerLink="['/admin/product/', p.$key]">edit</a></td>
+        </tr>
+    </tbody>
+</table>
