@@ -1,5 +1,6 @@
 import { ProductService } from './../../product.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-products',
@@ -9,12 +10,18 @@ import { Component, OnInit } from '@angular/core';
 export class AdminProductsComponent implements OnInit {
   products$;
   constructor(
-    private productService: ProductService
+    private productService: ProductService,
+    private router: Router
   ) {
     this.products$ = this.productService.getAll();
   }
 
+  editProduct(product) {
+    this.router.navigate(['/admin/product/'+ product.key]);
+  }
   ngOnInit() {
   }
+
+
 
 }

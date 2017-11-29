@@ -12,9 +12,9 @@
     </thead>
     <tbody>
         <tr *ngFor="let p of products$ | async">
-            <td>{{p.title}}</td>
-            <td>{{p.price | currency:'NZD':true}}</td>
-            <td><a routerLink="['/admin/product/', p.$key]">edit</a></td>
+            <td>{{p.payload.val().title}}</td>
+            <td>{{p.payload.val().price | currency:'NZD':true}}</td>
+            <td><a (click)="editProduct(p)">edit</a></td>
         </tr>
     </tbody>
 </table>
