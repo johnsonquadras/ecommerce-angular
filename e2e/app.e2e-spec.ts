@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('ng-ecom App', () => {
+describe('angular-pwa App', () => {
   let page: AppPage;
 
   beforeEach(() => {

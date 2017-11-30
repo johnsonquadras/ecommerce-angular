@@ -9,17 +9,18 @@ export class AdminAuthGuardService implements CanActivate {
   constructor(private auth: AuthService, private userService: UserService) { }
 
   canActivate() {
-    return this.auth.user$
-      .map(user => {
-        console.log(user);
-        if (user) {
-          const { uid } = user;
-          const appUser = this.userService.get(uid);
-          console.log(appUser);
-          return false;
-        }
-        return false;
-      })
+    return true;
+    // return this.auth.user$
+    //   .map(user => {
+    //     console.log(user);
+    //     if (user) {
+    //       const { uid } = user;
+    //       const appUser = this.userService.get(uid);
+    //       console.log(appUser);
+    //       return false;
+    //     }
+    //     return false;
+    //   })
   }
 
 }

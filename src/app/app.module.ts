@@ -27,44 +27,11 @@ import { AuthService } from './auth.service';
 import { UserService } from './user.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { FormsModule } from '@angular/forms';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { AppRoutingModule } from './app-routing.module';
 
 
-const routes = [
-  {
-    path: '', component: HomeComponent,
-  },
-  {
-    path: 'products', component: ProductsComponent,
-  },
-  {
-    path: 'shopping-cart', component: ShoppingCartComponent
-  },
-  {
-    path: 'check-out', component: CheckOutComponent, CanActivate: AuthGuard
-  },
-  {
-    path: 'my/orders', component: MyOrdersComponent
-  },
-  {
-    path: 'order-success', component: OrderSuccessComponent
-  },
-  {
-    path: 'login', component: LoginComponent
-  },
-  {
-    path: 'admin/products', component: AdminProductsComponent, CanActivate: [AuthGuard, AdminAuthGuardService]
-  },
-  {
-    path: 'admin/products/new', component: ProductFormComponent, CanActivate: [AuthGuard, AdminAuthGuardService]
-  },
-  {
-    path: 'admin/product/:id', component: ProductFormComponent, CanActivate: [AuthGuard, AdminAuthGuardService]
-  },
 
-  {
-    path: 'admin/orders', component: AdminOrdersComponent, CanActivate: [AuthGuard, AdminAuthGuardService]
-  }
-]
 
 @NgModule({
   declarations: [
@@ -83,20 +50,23 @@ const routes = [
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
+    environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : [],
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     NgbModule.forRoot(),
-    RouterModule.forRoot(routes),
     FormsModule,
     CustomFormsModule,
   ],
-  providers: [AuthService,
+  providers: [
+    AuthService,
     AuthGuard,
     UserService,
     AdminAuthGuardService,
     CategoryService,
-    ProductService],
+    ProductService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
