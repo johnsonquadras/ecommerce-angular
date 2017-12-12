@@ -17,7 +17,7 @@ import { AdminAuthGuardService } from './admin-auth-guard.service';
 
 const routes: Routes = [
   {
-    path: '', component: HomeComponent,
+    path: '', component: ProductsComponent,
   },
   {
     path: 'products', component: ProductsComponent,

@@ -1,3 +1,24 @@
-<p>
-  products works!
-</p>
+<div class="row">
+  <div class="col-md-3">
+    <div class="list-group">
+      <a *ngFor="let c of categories$ | async" 
+      class="list-group-item list-group-item-action" routerLink="/">
+        {{c.name}}
+      </a>
+    </div>
+  </div>
+  <div class="col">
+    <div class="row">
+      <div class="col" *ngFor="let p of products$ | async">
+        <div class="card" style="width: 15rem;">
+          <img class="card-img-top" [src]="p.payload.val().imageUrl" alt="Card image cap">
+          <div class="card-block">
+            <h4 class="card-title">{{p.payload.val().title}}</h4>
+            <p class="card-text">{{p.payload.val().price | currency: 'USD': true}}</p>
+            <a href="#" class="btn btn-primary">Add to cart</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
