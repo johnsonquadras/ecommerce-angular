@@ -2,6 +2,11 @@
     <a routerLink="/admin/products/new" class="btn btn-primary">Add new product+ </a>
 </p>
 
+<input type="text" class="form-control"
+    #query
+    (keyup)="filter(query.value)"
+>
+
 <table class="table">
     <thead>
         <tr>
@@ -11,7 +16,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let p of products$ | async">
+        <tr *ngFor="let p of filteredProducts">
             <td>{{p.payload.val().title}}</td>
             <td>{{p.payload.val().price | currency:'NZD':true}}</td>
             <td><a (click)="editProduct(p)">edit</a></td>
